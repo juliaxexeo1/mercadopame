@@ -13,19 +13,22 @@ class ProdutoCreate(MethodView):#/produto/create
         dados=request.json
 
         tipo_de_produto=dados.get('tipo_de_produto')
+        marca=dados.get('marca')
         quantidade=dados.get('quantidade')
         preco=dados.get('preco')
 
         #validação de dados:
         if not isinstance(tipo_de_produto,str):
-            return{'error':'tipo invalido'}  
+            return{'error':'tipo invalido'} 
+        elif not isinstance(marca,str):
+            return{'error':'marca invalida'} 
         elif not isinstance (quantidade,int):
             return{'error':'quantidade invalida'}
         elif not isinstance (preco,int):
             return{'error':'preco invalida'}
        
         
-        produto=Produto(tipo_de_produto=tipo_de_produto,quantidade=quantidade,preco=preco)#continuar
+        produto=Produto(tipo_de_produto=tipo_de_produto,marca=marca,quantidade=quantidade,preco=preco)#continuar
         db.session.add(produto)
         db.session.commit()
 
@@ -42,13 +45,16 @@ class ProdutoDetails(MethodView): #'/produto/details/<int:id>'
         produto = Produto.query.get_or_404(id)
         dados = request.json
 
-        tipo_de_produto=dados.get('tipo_de_produto')
-        quantidade=dados.get('quantidade')
-        preco=dados.get('preco')
+        tipo_de_produto = dados.get('tipo_de_produto')
+        marca = dados.get('marca')
+        quantidade = dados.get('quantidade')
+        preco = dados.get('preco')
         
         #validação de dados:
         if not isinstance(tipo_de_produto,str):
             return{'error':'tipo invalido'}  
+        elif not isinstance(marca,str):
+            return{'error':'marca invalida'}
         elif not isinstance (quantidade,int):
             return{'error':'quantidade invalida'}
         elif not isinstance (preco,int):
@@ -56,6 +62,7 @@ class ProdutoDetails(MethodView): #'/produto/details/<int:id>'
        
 
         produto.tipo_de_produto=tipo_de_produto
+        produto.marca=marca
         produto.quantidade=quantidade
         produto.preco=preco
 
@@ -71,12 +78,16 @@ class ProdutoDetails(MethodView): #'/produto/details/<int:id>'
 
         
         tipo_de_produto=dados.get('tipo_de_produto',produto.tipo_de_produto)
+        marca=dados.get('marca',produto.marca)
         quantidade=dados.get('quantidade',produto.quantidade)
         preco=dados.get('preco',produto.preco)
+        
         
         #validação de dados:
         if not isinstance(tipo_de_produto,str):
             return{'error':'tipo invalido'}  
+        elif not isinstance(marca,str):
+            return{'error':'marca invalida'}
         elif not isinstance (quantidade,int):
             return{'error':'quantidade invalida'}
         elif not isinstance (preco,int):
@@ -84,6 +95,7 @@ class ProdutoDetails(MethodView): #'/produto/details/<int:id>'
        
 
         produto.tipo_de_produto=tipo_de_produto
+        produto.marca=marca
         produto.quantidade=quantidade
         produto.preco=preco
 

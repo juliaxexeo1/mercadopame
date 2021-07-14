@@ -1,8 +1,9 @@
 from flask.wrappers import Request
 from app.Cliente.model import Cliente
-from flask import request,jsonify
+from flask import request,jsonify,render_template
 from flask.views import MethodView
-from app.extensions import db
+from app.extensions import db, mail
+from flask_mail import Message
 
 class ClienteCreate(MethodView):#'/cliente/create'
     def get(self):
@@ -32,6 +33,15 @@ class ClienteCreate(MethodView):#'/cliente/create'
         cliente = Cliente(nome=nome,cpf=cpf,endereco=endereco,email=email)
         db.session.add(cliente)
         db.session.commit()
+
+        msg = Message(
+            sender= 'jujuvx@gmail.com',
+            recipients=[email],
+            subject= "Cadastro feito com sucesso",
+            html=render_template('email.html',nome=nome)
+
+        )
+        mail.send(msg)
 
         return cliente.json(),200
 
