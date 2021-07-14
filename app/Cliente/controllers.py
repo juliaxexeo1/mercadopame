@@ -35,7 +35,7 @@ class ClienteCreate(MethodView):#'/cliente/create'
         db.session.commit()
 
         msg = Message(
-            sender= 'jujuvx@gmail.com',
+            sender= 'julia.xexeo@poli.ufrj.br',
             recipients=[email],
             subject= "Cadastro feito com sucesso",
             html=render_template('email.html',nome=nome)
