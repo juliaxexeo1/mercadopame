@@ -1,7 +1,7 @@
 from flask import Flask
 from app.config import Config
 from app.extensions import db,migrate,mail
-from app.Cliente.routes import cliente_api
+from app.cliente.routes import cliente_api
 from app.produtos.routes import produto_api
 
 def create_app():

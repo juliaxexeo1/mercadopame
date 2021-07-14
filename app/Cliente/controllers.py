@@ -1,5 +1,5 @@
 from flask.wrappers import Request
-from app.Cliente.model import Cliente
+from app.cliente.model import Cliente
 from flask import request,jsonify,render_template
 from flask.views import MethodView
 from app.extensions import db, mail

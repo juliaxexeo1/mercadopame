@@ -1,6 +1,6 @@
-from app.Cliente.model import Cliente
+from app.cliente.model import Cliente
 from flask import Blueprint
-from app.Cliente.controllers import ClienteCreate, ClientesDetails
+from app.cliente.controllers import ClienteCreate, ClientesDetails
 
 cliente_api = Blueprint('cliente_api',__name__)
 
